@@ -275,7 +275,10 @@ class _BMIPageState extends State<BMIPage> {
       'bmi_date',
       DateTime.now().toString(),
     );
-    await prefs.setStringList('bmi_data', <String>[_bmi, _status]);
+    await prefs.setStringList('bmi_data', <String>[
+      _bmi,
+      _status,
+    ]);
     print("BMI Saved");
   }
 }
