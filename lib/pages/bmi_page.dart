@@ -11,7 +11,7 @@ class BMIPage extends StatefulWidget {
 
 class _BMIPageState extends State<BMIPage> {
   double? _deviceHeight, _deviceWidth;
-  int _age = 25, _weight = 160, _height = 70;
+  int _age = 25, _weight = 160, _height = 70, _gender = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +35,7 @@ class _BMIPageState extends State<BMIPage> {
               ],
             ),
             _heightSelectContainer(),
+            _genderSelectContainer(),
           ],
         ),
       ),
@@ -182,6 +183,35 @@ class _BMIPageState extends State<BMIPage> {
                   });
                 }),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _genderSelectContainer() {
+    return InfoCard(
+      height: _deviceHeight! * 0.20,
+      width: _deviceWidth! * 0.90,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'Gender',
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+          ),
+          CupertinoSlidingSegmentedControl(
+              groupValue: _gender,
+              children: const {
+                0: Text("Male"),
+                1: Text("Female"),
+              },
+              onValueChanged: (_value) {
+                setState(() {
+                  _gender = _value as int;
+                });
+              })
         ],
       ),
     );
