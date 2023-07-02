@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ibmi/widgets/info_card.dart';
@@ -18,25 +20,28 @@ class _BMIPageState extends State<BMIPage> {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
     return CupertinoPageScaffold(
-      child: Container(
-        height: _deviceHeight! * 0.85,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _ageSelectContainer(),
-                _weightSelectContainer(),
-              ],
-            ),
-            _heightSelectContainer(),
-            _genderSelectContainer(),
-          ],
+      child: Center(
+        child: Container(
+          height: _deviceHeight! * 0.85,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _ageSelectContainer(),
+                  _weightSelectContainer(),
+                ],
+              ),
+              _heightSelectContainer(),
+              _genderSelectContainer(),
+              _calculateBMIButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -214,6 +219,27 @@ class _BMIPageState extends State<BMIPage> {
               })
         ],
       ),
+    );
+  }
+
+  Widget _calculateBMIButton() {
+    return Container(
+      height: _deviceHeight! * 0.07,
+      child: CupertinoButton.filled(
+          child: const Text(
+            "Calculate BMI",
+          ),
+          onPressed: (() {
+            if (_height > 0 && _weight > 0 && _age > 0) {
+              double _bmi = 703 *
+                  (_weight /
+                      pow(
+                        _height,
+                        2,
+                      ));
+              print(_bmi);
+            }
+          })),
     );
   }
 }
