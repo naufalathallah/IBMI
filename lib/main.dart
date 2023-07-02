@@ -1,9 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:developer' as developer;
 
-import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:ibmi/pages/main_page.dart';
 
 void main() {
+  developer.log("\x1B[37mIBMI App Starting\x1B[0m");
   runApp(const MyApp());
 }
 
