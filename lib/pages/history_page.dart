@@ -38,7 +38,7 @@ class HistoryPage extends StatelessWidget {
                   ),
                   _dateText(_date!),
                   _bmiText(
-                    _data![0],
+                    _data[0],
                   ),
                 ],
               ),
