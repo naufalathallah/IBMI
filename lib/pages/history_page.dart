@@ -23,31 +23,31 @@ class HistoryPage extends StatelessWidget {
           final _prefs = _snapshot.data as SharedPreferences;
           final _date = _prefs.getString('bmi_date');
           final _data = _prefs.getStringList('bmi_data');
-          return Center(
-            child: InfoCard(
-              height: _deviceHeight! * 0.25,
-              width: _deviceWidth! * 0.75,
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _statusText(
-                    _data![1],
-                  ),
-                  _dateText(_date!),
-                  _bmiText(_data[0]),
-                ],
+
+          if (_date != null && _data != null && _data.length > 1) {
+            return Center(
+              child: InfoCard(
+                height: _deviceHeight! * 0.25,
+                width: _deviceWidth! * 0.75,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _statusText(_data[1]),
+                    _dateText(_date),
+                    _bmiText(_data[0]),
+                  ],
+                ),
               ),
-            ),
-          );
-        } else {
-          return const Center(
-            child: CupertinoActivityIndicator(
-              color: Colors.blue,
-            ),
-          );
+            );
+          }
         }
+        return const Center(
+          child: CupertinoActivityIndicator(
+            color: Colors.blue,
+          ),
+        );
       },
     );
   }
